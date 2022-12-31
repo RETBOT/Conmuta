@@ -1,0 +1,252 @@
+configuracion Router
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host BIBLIOTECA
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0
+BIBLIOTECA(config-if)#no sh
+
+BIBLIOTECA(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+BIBLIOTECA(config-if)#exit
+BIBLIOTECA(config)#int fa 0/0.10
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 10
+BIBLIOTECA(config-subif)#ip add 13.43.1.1 255.255.255.0
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#int fa 0/0.20
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.20, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 20
+BIBLIOTECA(config-subif)#ip add 13.43.2.1 255.255.255.128
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.30
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.30, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.30, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 30
+BIBLIOTECA(config-subif)#ip add 13.43.2.129 255.255.255.128
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.40
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.40, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.40, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 40
+BIBLIOTECA(config-subif)#ip add 13.43.3.1 255.255.255.128
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.50
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.50, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.50, changed state to up
+BIBLIOTECA(config-subif)#encapsulation dot1Q 50
+BIBLIOTECA(config-subif)#ip add 13.43.3.129 255.255.255.192
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.60
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.60, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.60, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 60
+BIBLIOTECA(config-subif)#ip add 13.43.3.193 255.255.255.240
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.70
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.70, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.70, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 70
+BIBLIOTECA(config-subif)#ip add 13.43.3.209 255.255.255.240
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#int fa 0/0.80
+BIBLIOTECA(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.80, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.80, changed state to up
+
+BIBLIOTECA(config-subif)#encapsulation dot1Q 80
+BIBLIOTECA(config-subif)#ip add 13.43.3.225 255.255.255.248
+BIBLIOTECA(config-subif)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.130 // Servidor
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.1.1 // ip vlan 10 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.2.1 // ip vlan 20 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.2.129 // ip vlan 30 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.1 // ip vlan 40 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.129 // ip vlan 50 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.193 // ip vlan 60 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.209 // ip vlan 70 router
+BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.225 // ip vlan 80 router
+
+// Pool dhcp
+// VLAN = Access Point
+BIBLIOTECA(config)#ip dhcp pool vlan10
+BIBLIOTECA(dhcp-config)#network 13.43.1.0 255.255.255.0
+BIBLIOTECA(dhcp-config)#default-router 13.43.1.1
+BIBLIOTECA(dhcp-config)#opt
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.1.1
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN = Cubiculos
+BIBLIOTECA(config)#ip dhcp pool vlan20
+BIBLIOTECA(dhcp-config)#network 13.43.2.0 255.255.255.128
+BIBLIOTECA(dhcp-config)#default-rou
+BIBLIOTECA(dhcp-config)#default-router 13.43.2.1
+BIBLIOTECA(dhcp-config)#opt
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.2.1
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN Aula Activa
+BIBLIOTECA(config)#ip dhcp pool vlan30
+BIBLIOTECA(dhcp-config)#network 13.43.2.128 255.255.255.128
+BIBLIOTECA(dhcp-config)#defau
+BIBLIOTECA(dhcp-config)#default-router 13.43.2.129
+BIBLIOTECA(dhcp-config)#opt
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.2.129
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN Aula proyector
+BIBLIOTECA(config)#ip dhcp pool vlan40
+BIBLIOTECA(dhcp-config)#network 13.43.3.0 255.255.255.128
+BIBLIOTECA(dhcp-config)#default-router 13.43.3.1
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.1
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN Administrativos
+BIBLIOTECA(config)#ip dhcp pool vlan50
+BIBLIOTECA(dhcp-config)#network 13.43.3.128 255.255.255.192
+BIBLIOTECA(dhcp-config)#default-router 13.43.3.129
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.129
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN info libros
+BIBLIOTECA(config)#ip dhcp pool vlan60
+BIBLIOTECA(dhcp-config)#network 13.43.3.192 255.255.255.240
+BIBLIOTECA(dhcp-config)#default-router 13.43.3.193
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.193
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN Modulo de servicio
+BIBLIOTECA(config)#ip dhcp pool vlan70
+BIBLIOTECA(dhcp-config)#network 13.43.3.208 255.255.255.240
+BIBLIOTECA(dhcp-config)#default-router 13.43.3.209
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.209
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+// VLAN TELEFONOS
+BIBLIOTECA(config)#ip dhcp pool vlan80
+BIBLIOTECA(dhcp-config)#network 13.43.3.224 255.255.255.248
+BIBLIOTECA(dhcp-config)#default-router 13.43.3.225
+BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.225
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ip dhcp pool vlan10
+BIBLIOTECA(dhcp-config)#dns
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan20
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan30
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan40
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan50
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan60
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan70
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#ip dhcp pool vlan80
+BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
+BIBLIOTECA(dhcp-config)#exit
+BIBLIOTECA(config)#
+
+// Configuracion telefonos
+BIBLIOTECA(config)#telephony-service
+BIBLIOTECA(config-telephony)#max-dn 8
+BIBLIOTECA(config-telephony)#max-ep
+BIBLIOTECA(config-telephony)#max-ephones 8
+BIBLIOTECA(config-telephony)#ip so
+BIBLIOTECA(config-telephony)#ip source-address 13.43.3.225 port 2000
+BIBLIOTECA(config-telephony)#autto ass
+BIBLIOTECA(config-telephony)#auto ass
+BIBLIOTECA(config-telephony)#auto assign 4 to 6
+BIBLIOTECA(config-telephony)#auto assign 1 to 8
+BIBLIOTECA(config-telephony)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ephone-dn 1
+BIBLIOTECA(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 1.1, changed state to up
+BIBLIOTECA(config-ephone-dn)#number 501
+BIBLIOTECA(config-ephone-dn)#exit
+BIBLIOTECA(config)#ephone 1
+BIBLIOTECA(config-ephone)#mac-ad
+BIBLIOTECA(config-ephone)#mac-address 0001.96E0.8B01
+BIBLIOTECA(config-ephone)#type 7960
+BIBLIOTECA(config-ephone)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ephone-dn 2
+BIBLIOTECA(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 2.1, changed state to up
+BIBLIOTECA(config-ephone-dn)#number 502
+BIBLIOTECA(config-ephone-dn)#exit
+BIBLIOTECA(config)#ephone 2
+BIBLIOTECA(config-ephone)#mac-address 0001.420A.5A01
+BIBLIOTECA(config-ephone)#type 7960
+BIBLIOTECA(config-ephone)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ephone-dn 3
+BIBLIOTECA(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 3.1, changed state to up
+BIBLIOTECA(config-ephone-dn)#number 503
+BIBLIOTECA(config-ephone-dn)#exit
+BIBLIOTECA(config)#ephone 3
+BIBLIOTECA(config-ephone)#mac-address 0060.5C38.0301
+BIBLIOTECA(config-ephone)#type 7960
+BIBLIOTECA(config-ephone)#exit
+BIBLIOTECA(config)#
+
+BIBLIOTECA(config)#ephone-dn 4
+BIBLIOTECA(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 4.1, changed state to up
+
+BIBLIOTECA(config-ephone-dn)#number 504
+BIBLIOTECA(config-ephone-dn)#exit
+BIBLIOTECA(config)#ephone 4
+BIBLIOTECA(config-ephone)#mac-address 0006.2AB5.C101
+BIBLIOTECA(config-ephone)#type 7960
+BIBLIOTECA(config-ephone)#exit
+BIBLIOTECA(config)#
+BIBLIOTECA(config)#do wr
+Building configuration...
+[OK]
+BIBLIOTECA(config)#

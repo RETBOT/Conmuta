@@ -1,0 +1,77 @@
+Port security
+// Switch
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int fa 0/1
+Switch(config-if)#sw
+Switch(config-if)#switchport 
+% Incomplete command.
+Switch(config-if)#
+Switch(config-if)#sw
+Switch(config-if)#switchport mode acc
+Switch(config-if)#switchport mode access
+Switch(config-if)#sw
+Switch(config-if)#switchport port-se
+Switch(config-if)#switchport port-security 
+Switch(config-if)#sw
+Switch(config-if)#switchport portse
+Switch(config-if)#switchport port-se
+Switch(config-if)#switchport port-security max
+Switch(config-if)#switchport port-security maximum 1
+Switch(config-if)#sw
+Switch(config-if)#switchport port-se
+Switch(config-if)#switchport port-security viol
+Switch(config-if)#switchport port-security violation shut
+Switch(config-if)#switchport port-security violation shutdown  
+Switch(config-if)#switchport port-security mac-address 0090.2B4D.D166
+Switch(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+%LINK-5-CHANGED: Interface FastEthernet0/2, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/2, changed state to up
+
+Switch(config-if)#
+Switch(config-if)#exit
+Switch(config)#exit
+Switch#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Switch#show port-
+Switch#show port-security int fa 0/1
+Port Security              : Enabled
+Port Status                : Secure-up
+Violation Mode             : Shutdown
+Aging Time                 : 0 mins
+Aging Type                 : Absolute
+SecureStatic Address Aging : Disabled
+Maximum MAC Addresses      : 1
+Total MAC Addresses        : 1
+Configured MAC Addresses   : 1
+Sticky MAC Addresses       : 0
+Last Source Address:Vlan   : 0040.0BD0.C0A7:1
+Security Violation Count   : 0
+
+// para volver a activar el puerto, tenemos que apagarlo y despues prenderlo
+Switch#
+Switch(config)#int fa 0/1
+Switch(config-if)#
+Switch(config-if)#sh
+Switch(config-if)#shutdown
+
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to administratively down
+Switch(config-if)#no sh
+Switch(config-if)#no shutdown 
+
+Switch(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+Switch(config-if)#
+Switch(config)#do wr
+Building configuration...
+[OK]

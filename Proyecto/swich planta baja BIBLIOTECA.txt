@@ -1,0 +1,161 @@
+// Swich planta baja
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host SWAB
+
+SWAB(config)#vlan 10
+SWAB(config-vlan)#name ACCESS_POINT_OTROS
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 20
+SWAB(config-vlan)#name CUBICULOS
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 30
+SWAB(config-vlan)#name AULA_ACTIVA
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 40
+SWAB(config-vlan)#name AULA_PROYECTOR
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 50
+SWAB(config-vlan)#name ADMINISTRATIVOS
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 60
+SWAB(config-vlan)#name MAQUINAS_INFO
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 70
+SWAB(config-vlan)#name MODULO_SERVICIO
+SWAB(config-vlan)#exit
+SWAB(config)#vlan 80
+SWAB(config-vlan)#name VOZIP_TELEFONOS
+SWAB(config-vlan)#exit
+
+// apagamos el puerto 24, no esta en uso
+SWAB(config)#int fa 0/24
+SWAB(config-if)#sh
+SWAB(config-if)#shutdown 
+
+%LINK-5-CHANGED: Interface FastEthernet0/24, changed state to administratively down
+SWAB(config-if)#
+SWAB(config-if)#
+
+SWAB(config)#int fa 0/23
+SWAB(config-if)#swi
+SWAB(config-if)#switchport mode trun
+SWAB(config-if)#switchport mode trunk 
+SWAB(config-if)#switchport trunk allowed vlan 10,20,30,40,50,60,70,80
+SWAB(config-if)#exit
+SWAB(config)#
+
+// AP Otros
+SWAB(config-if)#int fa 0/1
+SWAB(config-if)#swi
+SWAB(config-if)#switchport mode access
+SWAB(config-if)#swi
+SWAB(config-if)#switchport access vlan 10
+SWAB(config-if)#exit
+SWAB(config)#
+
+// CUBICULOS
+SWAB(config)#int fa 0/2
+SWAB(config-if)#sw
+SWAB(config-if)#switchport mode access
+SWAB(config-if)#swi
+SWAB(config-if)#switchport access vlan 20
+SWAB(config-if)#exit
+SWAB(config)#
+
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host C
+Switch(config)#host Cubiculos
+Cubiculos(config)#
+Cubiculos(config)#vlan 20
+Cubiculos(config-vlan)#name CUBICULOS
+Cubiculos(config-vlan)#name CUBICULOS
+Cubiculos(config-vlan)#int range fa 0/1-24
+Cubiculos(config-if-range)#sw
+Cubiculos(config-if-range)#switchport mode acc
+Cubiculos(config-if-range)#switchport mode access
+Cubiculos(config-if-range)#sw
+Cubiculos(config-if-range)#switchport access vlan 20
+Cubiculos(config-if-range)#exit
+Cubiculos(config)#
+
+// Administrativos
+SWAB(config)#int range fa 0/3-4
+SWAB(config-if-range)#swi
+SWAB(config-if-range)#switchport mode ac
+SWAB(config-if-range)#switchport mode access 
+SWAB(config-if-range)#sw
+SWAB(config-if-range)#switchport ac
+SWAB(config-if-range)#switchport access vlan 50
+SWAB(config-if-range)#exit
+SWAB(config)#
+
+// Maquinas info libros
+SWAB(config)#int range fa 0/4-7
+SWAB(config-if-range)#swi
+SWAB(config-if-range)#switchport mode ac
+SWAB(config-if-range)#switchport mode access 
+SWAB(config-if-range)#sw
+SWAB(config-if-range)#switchport ac
+SWAB(config-if-range)#switchport access vlan 60
+SWAB(config-if-range)#
+
+// Modulo servicio
+
+SWAB(config-if-range)#int fa 0/8
+SWAB(config-if)#sw
+SWAB(config-if)#switchport mode ac
+SWAB(config-if)#switchport mode access 
+SWAB(config-if)#sw
+SWAB(config-if)#switchport ac
+SWAB(config-if)#switchport access vlan 70
+SWAB(config-if)#
+
+// Telefonos
+SWAB(config-if)#int range fa 0/9-11
+SWAB(config-if-range)#sw
+SWAB(config-if-range)#switchport voice
+SWAB(config-if-range)#switchport voice vlan 80
+SWAB(config-if-range)#exit
+SWAB(config)#
+
+// Administrador
+SWAB(config)#int fa 0/21
+SWAB(config-if)#swi
+SWAB(config-if)#switchport mode ac
+SWAB(config-if)#switchport mode access 
+SWAB(config-if)#sw
+SWAB(config-if)#switchport ac
+SWAB(config-if)#switchport access vl
+SWAB(config-if)#switchport access vlan 50
+SWAB(config-if)#port
+SWAB(config-if)#sw
+SWAB(config-if)#switchport port
+SWAB(config-if)#switchport port-security 
+SWAB(config-if)#switchport port-security max
+SWAB(config-if)#switchport port-security maximum 1
+SWAB(config-if)#sw
+SWAB(config-if)#switchport port
+SWAB(config-if)#switchport port-security vio
+SWAB(config-if)#switchport port-security violation sh
+SWAB(config-if)#switchport port-security violation shutdown 
+SWAB(config-if)#switchport port-security mac-address 0001.4385.4919
+SWAB(config-if)#
+SWAB#show port-security int fa 0/21
+Port Security              : Enabled
+Port Status                : Secure-up
+Violation Mode             : Shutdown
+Aging Time                 : 0 mins
+Aging Type                 : Absolute
+SecureStatic Address Aging : Disabled
+Maximum MAC Addresses      : 1
+Total MAC Addresses        : 1
+Configured MAC Addresses   : 1
+Sticky MAC Addresses       : 0
+Last Source Address:Vlan   : 0002.4ABB.6B38:50
+Security Violation Count   : 0
+
+SWAB#

@@ -1,0 +1,500 @@
+
+Router>enable
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#int fa 0/0
+R1(config-if)#no sh
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R1(config-if)#exit
+R1(config)#int fa 0/0.10
+R1(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+R1(config-subif)#enca
+R1(config-subif)#encapsulation do
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip add 192.168.10.1 255.255.255.128
+R1(config-subif)#exit
+R1(config)#int fa 0/0.20
+R1(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.20, changed state to up
+
+R1(config-subif)#encapsulation dot1Q 20
+R1(config-subif)#ip add 192.168.20.1 255.255.255.128
+R1(config-subif)#exit
+R1(config)#int fa 0/0.30
+R1(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.30, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.30, changed state to up
+
+R1(config-subif)#encapsulation dot1Q 30
+R1(config-subif)#ip add 192.168.30.1 255.255.255.128
+R1(config-subif)#exit
+R1(config)#int fa 0/1.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip add 192.168.10.1 255.255.255.128
+% 192.168.10.0 overlaps with FastEthernet0/0.10
+R1(config-subif)#exit
+R1(config)#int fa 0/1.20
+R1(config-subif)#encapsulation dot1Q 20
+R1(config-subif)#ip add 192.168.20.1 255.255.255.128
+% 192.168.20.0 overlaps with FastEthernet0/0.20
+R1(config-subif)#exit
+R1(config)#
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int fa 0/1.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip add 192.168.10.129 255.255.255.128
+R1(config-subif)#exit
+R1(config)#int fa 0/1.20
+R1(config-subif)#enc
+R1(config-subif)#encapsulation dot1Q 20
+R1(config-subif)#ip add 192.168.20.129 255.255.255.128
+R1(config-subif)#exit
+R1(config)#int fa 0/1.30
+R1(config-subif)#enc
+R1(config-subif)#encapsulation dot1Q 30
+R1(config-subif)#ip add 192.168.30.129 255.255.255.128
+R1(config-subif)#exit
+ip dhcp excluded-address 192.168.10.1
+ip dhcp excluded-address 192.168.20.1
+ip dhcp excluded-address 192.168.30.1
+ip dhcp excluded-address 192.168.10.192
+ip dhcp excluded-address 192.168.20.192
+ip dhcp excluded-address 192.168.30.192
+R1(config)#ip dhcp pool vlan10
+R1(dhcp-config)#ne
+R1(dhcp-config)#network 192.168.10.0 255.255.255.128
+R1(dhcp-config)#defa
+R1(dhcp-config)#default-router 192.168.10.1
+R1(dhcp-config)#opt
+R1(dhcp-config)#option 150 ip 192.168.10.1
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan20
+R1(dhcp-config)#netw
+R1(dhcp-config)#network 192.168.20.0 255.255.255.255.128
+R1(dhcp-config)#def
+R1(dhcp-config)#default-router 192.168.20.1
+R1(dhcp-config)#op
+R1(dhcp-config)#option 150 ip 192.168.20.1
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan30
+R1(dhcp-config)#ne
+R1(dhcp-config)#network 192.168.30.0 255.255.255.128
+R1(dhcp-config)#def
+R1(dhcp-config)#default-router 192.168.30.1
+R1(dhcp-config)#op
+R1(dhcp-config)#option 150 ip 192.168.30.1
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan10-1
+R1(dhcp-config)#net
+R1(dhcp-config)#network 192.168.10.128 255.255.255.128
+R1(dhcp-config)#def
+R1(dhcp-config)#default-router 192.168.10.129
+R1(dhcp-config)#op
+R1(dhcp-config)#option 150 ip 192.168.10.129
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan20-1
+R1(dhcp-config)#network 192.168.20.128 255.255.255.128
+R1(dhcp-config)#default-router 192.168.20.129
+R1(dhcp-config)#option 150 ip 192.168.20.129
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan30-1
+R1(dhcp-config)#network 192.168.20.128 255.255.255.128
+R1(dhcp-config)#network 192.168.30.128 255.255.255.128
+R1(dhcp-config)#default-router 192.168.30.129
+R1(dhcp-config)#option 150 ip 192.168.30.129
+R1(dhcp-config)#exit
+R1(config)#telep
+R1(config)#telephony-service 
+R1(config-telephony)#max
+R1(config-telephony)#max-dn 10
+R1(config-telephony)#max-ep
+R1(config-telephony)#max-ephones 10
+R1(config-telephony)#ip sou
+R1(config-telephony)#ip source-address 192.168.30.1 port 2000
+R1(config-telephony)#auto ass
+R1(config-telephony)#auto assign 4 to 6
+R1(config-telephony)#auto assign 1 to 5
+R1(config-telephony)#exit
+R1(config)#ephone-dn 1 
+R1(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 1.1, changed state to up
+
+R1(config-ephone-dn)#number 501
+R1(config-ephone-dn)#exit
+R1(config)#ephone-dn 2
+R1(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 2.1, changed state to up
+
+R1(config-ephone-dn)#number 502
+R1(config-ephone-dn)#exit
+R1(config)#ephone-dn 3
+R1(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 3.1, changed state to up
+
+R1(config-ephone-dn)#number 503
+R1(config-ephone-dn)#exit
+R1(config)#ephone-dn 
+% Incomplete command.
+R1(config)#ephone-dn 4
+R1(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 4.1, changed state to up
+
+R1(config-ephone-dn)#number 504
+R1(config-ephone-dn)#exit
+R1(config)#sh run
+            ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#do sh run
+Building configuration...
+
+Current configuration : 2354 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1
+!
+!
+!
+!
+ip dhcp excluded-address 192.168.10.1
+ip dhcp excluded-address 192.168.20.1
+ip dhcp excluded-address 192.168.30.1
+ip dhcp excluded-address 192.168.10.129
+ip dhcp excluded-address 192.168.20.129
+ip dhcp excluded-address 192.168.30.129
+!
+ip dhcp pool vlan10
+ network 192.168.10.0 255.255.255.128
+ default-router 192.168.10.1
+ option 150 ip 192.168.10.1
+ip dhcp pool vlan20
+ network 192.168.20.0 255.255.255.128
+ default-router 192.168.20.1
+ option 150 ip 192.168.20.1
+ip dhcp pool vlan30
+ network 192.168.30.0 255.255.255.128
+ default-router 192.168.30.1
+ option 150 ip 192.168.30.1
+ip dhcp pool vlan10-1
+ network 192.168.10.128 255.255.255.128
+ default-router 192.168.10.129
+ option 150 ip 192.168.10.129
+ip dhcp pool vlan20-1
+ network 192.168.20.128 255.255.255.128
+ default-router 192.168.20.129
+ option 150 ip 192.168.20.129
+ip dhcp pool vlan30-1
+ network 192.168.30.128 255.255.255.128
+ default-router 192.168.30.129
+ option 150 ip 192.168.30.129
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2811/K9 sn FTX10174RF8-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.128
+!
+interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.128
+!
+interface FastEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.128
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.129 255.255.255.128
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.129 255.255.255.128
+!
+interface FastEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.129 255.255.255.128
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+telephony-service
+ max-ephones 10
+ max-dn 10
+ ip source-address 192.168.30.1 port 2000
+ auto assign 4 to 6
+ auto assign 1 to 5
+!
+ephone-dn 1
+ number 501
+!
+ephone-dn 2
+ number 502
+!
+ephone-dn 3
+ number 503
+!
+ephone-dn 4
+ number 504
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+
+R1(config)#do wr
+Building configuration...
+[OK]
+R1(config)#
+
+
+Direccion MAC 
+tel 0: 00E0.A3E0.A501
+tel 1: 0002.165C.3C01
+tel 2: 000A.F3C6.B701
+tel 3: 0000.0C94.0801
+
+
+// SW 1
+Switch>ena
+Switch#
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host SW1
+SW1(config)#vlan 10
+SW1(config-vlan)#name v10
+SW1(config-vlan)#exit
+SW1(config)#vlan 20
+SW1(config-vlan)#name v20
+SW1(config-vlan)#exit
+SW1(config)#vlan 30
+SW1(config-vlan)#name v30
+SW1(config-vlan)#exit
+SW1(config)#int range fa 0/1-5
+SW1(config-if-range)#swi
+SW1(config-if-range)#switchport mode acc
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#exit
+SW1(config)#int range fa 0/6-10
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport mode acc
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport acce
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+SW1(config)#int range fa 0/11-15
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport voice vlan 30
+SW1(config-if-range)#exit
+SW1(config)#int fa 0/11
+SW1(config-if)#sw
+SW1(config-if)#switchport mode acce
+SW1(config-if)#switchport mode access 
+SW1(config-if)#sw
+SW1(config-if)#switchport acce
+SW1(config-if)#switchport access vlan 10
+SW1(config-if)#ex
+SW1(config-if)#exit 
+SW1(config)#int fa 0/12
+SW1(config-if)#sw
+SW1(config-if)#switchport mode acc
+SW1(config-if)#switchport mode access 
+SW1(config-if)#swi
+SW1(config-if)#switchport access vlan 20
+SW1(config-if)#exit
+SW1(config)#int fa 0/24
+SW1(config-if)#swi
+SW1(config-if)#switchport mode trunk
+SW1(config-if)#swi
+SW1(config-if)#switchport trunk allow
+SW1(config-if)#switchport trunk allowed vlan 10,20,30
+SW1(config-if)#exit
+SW1(config)#
+%LINK-3-UPDOWN: Interface FastEthernet0/23, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/23, changed state to down
+
+%LINK-5-CHANGED: Interface FastEthernet0/24, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/24, changed state to up
+SW1(config)#do wr
+Building configuration...
+[OK]
+SW1(config)#
+
+// SW 2
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#name v10
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#name v20
+Switch(config-vlan)#exit
+Switch(config)#vlan 30
+Switch(config-vlan)#name v30
+Switch(config-vlan)#exit
+Switch(config)#int range fa 0/1-5
+Switch(config-if-range)#swi
+Switch(config-if-range)#switchport mode acc
+Switch(config-if-range)#switchport mode access 
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport acces
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#exit
+Switch(config)#int range fa 0/6-10
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#swi
+Switch(config-if-range)#switchport ac
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#exit
+Switch(config)#int range fa 0/11-15
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport voice vlan 30
+Switch(config-if-range)#exit
+Switch(config)#int fa 0/11
+Switch(config-if)#swi
+Switch(config-if)#switchport mode acc
+Switch(config-if)#switchport mode access
+Switch(config-if)#sw
+Switch(config-if)#switchport access vlan 10
+Switch(config-if)#exit
+Switch(config)#int fa 0/12
+Switch(config-if)#sw
+Switch(config-if)#switchport mode acc
+Switch(config-if)#switchport mode access 
+Switch(config-if)#swi
+Switch(config-if)#switchport acc
+Switch(config-if)#switchport access vlan 20
+Switch(config-if)#exit
+Switch(config)#int fa 0/24
+Switch(config-if)#swi
+Switch(config-if)#switchport mode trunk
+
+Switch(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/24, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/24, changed state to up
+sw
+Switch(config-if)#switchport trn
+Switch(config-if)#switchport tr
+Switch(config-if)#switchport trunk allo
+Switch(config-if)#switchport trunk allowed vlan 10
+Switch(config-if)#switchport trunk allowed vlan 20
+Switch(config-if)#switchport trunk allowed vlan 30
+Switch(config-if)#switchport trunk allowed vlan 10,20,30
+Switch(config-if)#exit
+Switch(config)#do wr
+Building configuration...
+[OK]
+Switch(config)#
+
+
+
+
+
+
+// Servidor
+ip dhcp excluded-address 192.168.10.1
+R1>ena
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ip dhcp pool vlan10
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan20
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan30
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exi
+R1(config)#ip dhcp pool vlan10-1
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan20-1
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool vlan30-1
+R1(dhcp-config)#dns-server 192.168.10.5
+R1(dhcp-config)#exit
+R1(config)#
+R1(config)#do wr
+Building configuration...
+[OK]
+R1(config)#

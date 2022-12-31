@@ -1,0 +1,62 @@
+EIGRP BIBLIOTECA -> AUDITORIO
+
+BIBLIOTECA(config)#int fa 0/1
+BIBLIOTECA(config-if)#ip add 10.0.0.1 255.255.255.252
+BIBLIOTECA(config-if)#no sh
+
+BIBLIOTECA(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+BIBLIOTECA(config)#router eigrp 100
+BIBLIOTECA(config-router)#ne
+BIBLIOTECA(config-router)#netw
+BIBLIOTECA(config-router)#network 13.43.1.0 0.0.0.255
+BIBLIOTECA(config-router)#network 13.43.2.0 0.0.0.127
+BIBLIOTECA(config-router)#network 13.43.2.128 0.0.0.127
+BIBLIOTECA(config-router)#network 13.43.3.0 0.0.0.127
+BIBLIOTECA(config-router)#network 13.43.3.128 0.0.0.63
+BIBLIOTECA(config-router)#network 13.43.3.192 0.0.0.15
+BIBLIOTECA(config-router)#network 13.43.3.208 0.0.0.15
+BIBLIOTECA(config-router)#network 13.43.3.224 0.0.0.7
+BIBLIOTECA(config-router)#network 10.0.0.0 0.0.0.3
+BIBLIOTECA(config-router)#exit
+BIBLIOTECA(config)#do wr
+Building configuration...
+[OK]
+BIBLIOTECA(config)#
+
+
+
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host AUDITORIO
+AUDITORIO(config)#int fa 0/0
+AUDITORIO(config-if)#ip add 10.0.0.2 255.255.255.252
+AUDITORIO(config-if)#no sh
+
+AUDITORIO(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+AUDITORIO(config-if)#exit
+AUDITORIO(config)#int fa 0/1
+AUDITORIO(config-if)#ip add 13.42.1.1
+% Incomplete command.
+AUDITORIO(config-if)#ip add 13.42.1.1 255.255.255.0
+AUDITORIO(config-if)#no sh
+
+AUDITORIO(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+AUDITORIO(config-if)#exit
+AUDITORIO(config)#router eigrp 100
+AUDITORIO(config-router)#network 13.42.1.0 0.0.0.255
+AUDITORIO(config-router)#exit
+AUDITORIO(config)#do wr
+Building configuration...
+[OK]
+AUDITORIO(config)#

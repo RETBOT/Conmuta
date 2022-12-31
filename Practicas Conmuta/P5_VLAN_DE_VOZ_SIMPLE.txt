@@ -1,0 +1,114 @@
+         --- System Configuration Dialog ---
+
+Would you like to enter the initial configuration dialog? [yes/no]: n
+
+
+Press RETURN to get started!
+
+
+
+Router>ena 
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host VOZ
+VOZ(config)#int fa 0/0
+VOZ(config-if)#ip add 192.168.1.1 255.255.255.0
+VOZ(config-if)#no sh
+
+VOZ(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+VOZ(config-if)#exit
+VOZ(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+VOZ(config)#ip dhcp pool voice
+VOZ(dhcp-config)#net
+VOZ(dhcp-config)#network 192.168.10.0 255.255.255.0
+VOZ(dhcp-config)#de
+VOZ(dhcp-config)#default-router 192.168.10.1
+VOZ(dhcp-config)#option 150 ip 192.168.10.1
+VOZ(dhcp-config)#exit
+VOZ(config)#tel
+VOZ(config)#telephony-service
+VOZ(config-telephony)#max-dn 5
+VOZ(config-telephony)#max-ephone 5
+VOZ(config-telephony)#ip so
+VOZ(config-telephony)#ip source-address 192.168.10.1 port 2000
+VOZ(config-telephony)#auto ass
+VOZ(config-telephony)#auto assign 4 to 6
+VOZ(config-telephony)#auto assign 1 to 5
+VOZ(config-telephony)#exit
+VOZ(config)#wr
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+
+VOZ>ena
+VOZ#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+VOZ(config)#tel
+VOZ(config)#telephony-service 
+VOZ(config-telephony)#exit
+VOZ(config)#ephone-dn 1
+VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 1.1, changed state to up
+
+VOZ(config-ephone-dn)#num
+VOZ(config-ephone-dn)#number 501
+VOZ(config-ephone-dn)#epone-dn 2
+                       ^
+% Invalid input detected at '^' marker.
+	
+VOZ(config-ephone-dn)#
+VOZ(config-ephone-dn)#ephone-dn 2
+VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 2.1, changed state to up
+
+VOZ(config-ephone-dn)#number 502
+VOZ(config-ephone-dn)#ephone-dn 3
+VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 3.1, changed state to up
+
+VOZ(config-ephone-dn)#number 503
+VOZ(config-ephone-dn)#ephone-dn 4
+VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 4.1, changed state to up
+
+VOZ(config-ephone-dn)#number 504
+VOZ(config-ephone-dn)#epone-dn 5
+                       ^
+% Invalid input detected at '^' marker.
+	
+VOZ(config-ephone-dn)#ephone-dn 5
+VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 5.1, changed state to up
+
+VOZ(config-ephone-dn)#505
+                      ^
+% Invalid input detected at '^' marker.
+	
+VOZ(config-ephone-dn)#number 505
+VOZ(config-ephone-dn)#exit
+VOZ(config)#do wr
+Building configuration...
+[OK]
+VOZ(config)#int ran fa 0/1-5
+interface range not validated - command rejected
+VOZ(config)#int ran fa 0/1-5
+
+// SWITCH 
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int ran fa 0/1-5
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport mode ac
+Switch(config-if-range)#switchport mode access 
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport voice vlan 1
+Switch(config-if-range)#exit
+Switch(config)#do wr
+Building configuration...
+[OK]
+Switch(config)#
+Switch#

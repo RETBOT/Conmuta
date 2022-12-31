@@ -1,0 +1,98 @@
+Switch>ena
+Switch#config
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#name BUENOS
+Switch(config-vlan)#vlan 20
+Switch(config-vlan)#name MALOS
+Switch(config-vlan)#vlan 30
+Switch(config-vlan)#name REGULARES
+Switch(config-vlan)#vlan 40
+Switch(config-vlan)#name PESIMOS
+Switch(config-vlan)#exit
+Switch(config)#do sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5, Fa0/6, Fa0/7, Fa0/8
+                                                Fa0/9, Fa0/10, Fa0/11, Fa0/12
+                                                Fa0/13, Fa0/14, Fa0/15, Fa0/16
+                                                Fa0/17, Fa0/18, Fa0/19, Fa0/20
+                                                Fa0/21, Fa0/22, Fa0/23, Fa0/24
+10   BUENOS                           active    
+20   MALOS                            active    
+30   REGULARES                        active    
+40   PESIMOS                          active    
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+
+
+Switch(config)#interface range fastEthernet 0/0-5
+interface range not validated - command rejected
+Switch(config)#interface range fastEthernet 0/1-5
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#exit
+Switch(config)#interface range fastEthernet 0/6-10
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#interface range fastEthernet 0/11-15
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 30
+Switch(config-if-range)#interface range fastEthernet 0/16-20
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 40
+Switch(config-if-range)#exit
+Switch(config)#do sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/21, Fa0/22, Fa0/23, Fa0/24
+10   BUENOS                           active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5
+20   MALOS                            active    Fa0/6, Fa0/7, Fa0/8, Fa0/9
+                                                Fa0/10
+30   REGULARES                        active    Fa0/11, Fa0/12, Fa0/13, Fa0/14
+                                                Fa0/15
+40   PESIMOS                          active    Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+
+
+Switch(config)#vlan 50
+Switch(config-vlan)#name OTROS
+Switch(config-vlan)#interface range fastEthernet 0/21-24
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 50
+Switch(config-if-range)#do sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    
+10   BUENOS                           active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5
+20   MALOS                            active    Fa0/6, Fa0/7, Fa0/8, Fa0/9
+                                                Fa0/10
+30   REGULARES                        active    Fa0/11, Fa0/12, Fa0/13, Fa0/14
+                                                Fa0/15
+40   PESIMOS                          active    Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20
+50   OTROS                            active    Fa0/21, Fa0/22, Fa0/23, Fa0/24
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0
+10   enet  100010     1500  -      -      -        -    -        0      0
+
+Switch(config-if-range)#

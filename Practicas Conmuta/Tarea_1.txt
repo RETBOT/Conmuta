@@ -1,0 +1,183 @@
+// SWITCH 1
+Switch>ena
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host SW1
+SW1(config)#vlan 90
+SW1(config-vlan)#name PREDETERMINADA
+SW1(config-vlan)#vlan 100
+SW1(config-vlan)#name ADMINSTRACION
+SW1(config-vlan)#vlan 10
+SW1(config-vlan)#name VENTAS
+SW1(config-vlan)#vlan 20
+SW1(config-vlan)#name RECURSOS_HUMANOS
+SW1(config-vlan)#exit
+SW1(config)#int range fa 0/21-22
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport mode acc
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#swi
+SW1(config-if-range)#switchport acc
+SW1(config-if-range)#switchport access vlan 90
+SW1(config-if-range)#exit
+SW1(config)#int fa 0/23
+SW1(config-if)#switchport mode access 
+SW1(config-if)#switchport access vlan 100
+SW1(config-if)#exit
+SW1(config)#int range fa 0/1-10
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#exit
+SW1(config)#int range fa 0/11-20
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+SW1(config)#int fa 0/24
+SW1(config-if)#switch
+SW1(config-if)#switchport mode tr
+SW1(config-if)#switchport mode trunk 
+
+SW1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/24, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/24, changed state to up
+
+SW1(config-if)#exit
+SW1(config)#do wr
+Building configuration...
+[OK]
+SW1(config)#
+
+
+
+
+// SWITCH 1
+Switch>ena
+Switch#conf
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host SW2
+SW2(config)#vlan 90
+SW2(config-vlan)#name PREDETERMINADA
+SW2(config-vlan)#vlan 10
+SW2(config-vlan)#name VENTAS
+SW2(config-vlan)#vlan 20
+SW2(config-vlan)#name RECURSOS_HUMANOS
+SW2(config-vlan)#exit
+SW2(config)#
+SW2(config)#int range fa 0/21-22
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport mode acce
+SW2(config-if-range)#switchport mode access 
+SW2(config-if-range)#switchport access vlan 90
+SW2(config-if-range)#exit
+SW2(config)#int range fa 0/1-10
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport mode access
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport acc
+SW2(config-if-range)#switchport access vlan 10
+SW2(config-if-range)#int range fa 0/11-20
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport mode access
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport access vlan 20
+SW2(config-if-range)#int fa 0/23
+SW2(config-if)#sw
+SW2(config-if)#switchport mode tr
+SW2(config-if)#switchport mode trunk 
+SW2(config-if)#exit
+SW2(config)#int fa 0/24
+SW2(config-if)#switchport mode trunk 
+SW2(config-if)#exit
+SW2(config)#do wr
+Building configuration...
+[OK]
+SW2(config)#
+
+// ROUTER
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host TRUNK
+TRUNK(config)#int fa 0/0
+TRUNK(config-if)#no sh
+
+TRUNK(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+TRUNK(config-if)#exit
+TRUNK(config)#int fa 0/0.10
+TRUNK(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.10, changed state to up
+
+TRUNK(config-subif)#enca
+TRUNK(config-subif)#encapsulation dot
+TRUNK(config-subif)#encapsulation dot1Q 10
+TRUNK(config-subif)#ip add 192.168.10.1 255.255.255.0
+TRUNK(config-subif)#exit
+TRUNK(config)#int fa 0/0.20
+TRUNK(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.20, changed state to up
+
+TRUNK(config-subif)#encapsulation dot1Q 20
+TRUNK(config-subif)#ip add 192.168.20.1 255.255.255.0
+TRUNK(config-subif)#exit
+TRUNK(config)#int fa 0/0.100
+TRUNK(config-subif)#enca
+TRUNK(config-subif)#encapsulation dot
+TRUNK(config-subif)#encapsulation dot1Q 100
+TRUNK(config-subif)#ip add 192.168.100.1 255.255.255.0
+TRUNK(config-subif)#exit
+TRUNK(config)#do wr
+Building configuration...
+[OK]
+TRUNK(config)#
+
+// configurar ssh 
+TRUNK>ena
+TRUNK#conf t
+TRUNK(config)#ip domain-name sistemas.com
+TRUNK(config)#crypto key generate rsa
+The name for the keys will be: TRUNK.sistemas.com
+Choose the size of the key modulus in the range of 360 to 2048 for your
+  General Purpose Keys. Choosing a key modulus greater than 512 may take
+  a few minutes.
+
+How many bits in the modulus [512]: 512
+% Generating 512 bit RSA keys, keys will be non-exportable...[OK]
+
+TRUNK(config)#ip ssh time-out 15
+*Mar 1 0:39:3.377: RSA key size needs to be at least 768 bits for ssh version 2
+*Mar 1 0:39:3.392: %SSH-5-ENABLED: SSH 1.5 has been enabled
+TRUNK(config)#ip ssh au
+TRUNK(config)#ip ssh authentication-retries 3
+TRUNK(config)#line vty 0 4
+TRUNK(config-line)#trans
+TRUNK(config-line)#transport input ssh
+TRUNK(config-line)#login local
+TRUNK(config-line)#exit
+TRUNK(config)#username admin
+TRUNK(config)#username admin provi
+TRUNK(config)#username admin pri
+TRUNK(config)#username admin privilege 15 pass
+TRUNK(config)#username admin privilege 15 password 123456
+TRUNK(config)#enable se
+TRUNK(config)#enable secret 123456
+TRUNK(config)#serv
+TRUNK(config)#service pas
+TRUNK(config)#service password-encryption 
+TRUNK(config)#
+TRUNK(config)#do sh ip ssh
+SSH Enabled - version 1.5
+Authentication timeout: 15 secs; Authentication retries: 3
+TRUNK(config)#TRUNK(config)#do wr
+Building configuration...
+[OK]
+TRUNK(config)#

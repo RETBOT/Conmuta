@@ -1,0 +1,106 @@
+// RTA
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 10.0.0.1 255.255.255.252
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#int fa 0/1
+Router(config-if)#ip add 192.168.1.1 255.255.255.0
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+Router(config-if)#exit
+Router(config)#router eigrp 100
+Router(config-router)#netw
+Router(config-router)#network 192.168.1.0 0.0.0.255
+Router(config-router)#network 10.0.0.0 0.0.0.3
+Router(config-router)#exit
+Router(config)#do wr
+Building configuration...
+[OK]
+Router(config)#
+
+// RTB
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 10.0.0.2 255.255.255.252
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#int fa 0/1
+Router(config-if)#ip add 11.0.0.1 255.255.255.252
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+Router(config-if)#exit
+Router(config)#router eigrp 100
+Router(config-router)#net
+Router(config-router)#network 10.0.0.0 0.0.0.3
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 10.0.0.1 (FastEthernet0/0) is up: new adjacency
+
+Router(config-router)#network 11.0.0.0 0.0.0.3
+Router(config-router)#exit
+Router(config)#do wr
+Building configuration...
+[OK]
+Router(config)#
+
+// RTC
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 192.168.2.1 255.255.255.0
+Router(config-if)#exit
+Router(config)#int fa 0/1
+Router(config-if)#ip add 11.0.0.2 255.255.255.252
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+Router(config-if)#exit
+Router(config)#int fa 0/0
+Router(config-if)#no sh
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#router eigrp 100
+Router(config-router)#net
+Router(config-router)#network 11.0.0.0 0.0.0.3
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 11.0.0.1 (FastEthernet0/1) is up: new adjacency
+
+Router(config-router)#ne
+Router(config-router)#netw
+Router(config-router)#network 192.168.2.0 0.0.0.255
+Router(config-router)#exit
+Router(config)#do wr
+Building configuration...
+[OK]
+Router(config)#

@@ -1,0 +1,845 @@
+Packet Tracer 8.2.0
+// Configuracion de Router E
+Router>ENA
+Router#conf t
+Router(config)#host E
+---------------Configuracion del puerto 0/0
+E(config)#int fa 0/0
+E(config-if)#ip add 192.168.10.1 255.255.255.0
+E(config-if)#no sh
+E(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+E(config-if)# exit
+--------------Configuracion del puerto serial 0/0/0 
+E(config)#int se 0/0/0
+E(config-if)#ip add 1.1.1.1 255.255.255.248
+E(config-if)#clock rate 64000
+E(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to down
+E(config-if)#
+E(config-if)#exit
+
+--------------Configuracion del puerto serial 0/1/0 
+E(config)#int se 0/1/0
+E(config-if)#ip add 2.2.2.1 255.255.255.248
+E(config-if)#clock rate 64000
+E(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to down
+E(config-if)#exit
+E(config)#
+
+--------------Configuracion del puerto serial 0/2/0 
+E(config)#int se 0/2/0
+E(config-if)#ip add 3.3.3.1 255.255.255.248
+E(config-if)#clock rate 64000
+E(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to down
+E(config-if)#exit
+E(config)#
+
+--------------Configuracion del puerto serial 0/3/0 
+E(config)#int se 0/3/0
+E(config-if)#ip add 4.4.4.1 255.255.255.248
+E(config-if)#clock rate 64000
+E(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/3/0, changed state to down
+E(config-if)#exit
+E(config)#
+
+------------Configuracion de las rutas
+--- E->A
+E(config-if)#ip route 192.168.20.0 255.255.255.0 1.1.1.2
+--- E->D->A
+E(config)#ip route 192.168.50.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.2
+-- E->B->A
+E(config)#ip route 192.168.30.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.2
+--- E->C->D->A
+E(config)#ip route 192.168.40.0 255.255.255.0 3.3.3.2
+E(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.2
+E(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.2
+--- E->C->B->A
+--ya esta la ruta de e a c
+E(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.2
+E(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.2
+-- E a B
+ip route 192.168.30.0 255.255.255.0 2.2.2.2
+--- E->A->B
+E(config)#ip route 192.168.20.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.2
+-- E->C->B
+E(config)#ip route 192.168.40.0 255.255.255.0 3.3.3.2
+E(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.2
+-- E->A->B
+E(config)#ip route 192.168.50.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.2
+-- E->C->B
+E(config)#ip route 192.168.50.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.2
+
+-- E a C
+E(config)#ip route 192.168.40.0 255.255.255.0 3.3.3.2
+-- E->B->C
+E(config)#ip route 192.168.30.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.2
+-- E->D->C
+E(config)#ip route 192.168.50.0 255.255.255.0 4.4.4.2
+E(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.2
+-- E->A->B->C
+E(config)#ip route 192.168.20.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.2
+-- E->A->D->C
+E(config)#ip route 192.168.20.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.2
+
+-- E a D
+E(config)#ip route 192.168.50.0 255.255.255.0 4.4.4.2
+-- E->A->D
+E(config)#ip route 192.168.20.0 255.255.255.0 1.1.1.2
+E(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.2
+-- E->C->D
+E(config)#ip route 192.168.40.0 255.255.255.0 3.3.3.2
+E(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.2
+-- E->B->A->D
+E(config)#ip route 192.168.30.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.2
+-- E->B->C->D
+E(config)#ip route 192.168.30.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.2
+E(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.2
+
+-- Guardamos
+E(config)#do wr
+Building configuration...
+[OK]
+E(config)#
+
+// Configuracion de Router A
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host A
+---------------Configuracion del puerto 0/0
+A(config)#int fa 0/0
+A(config-if)#ip add 192.168.20.1 255.255.255.0
+A(config-if)#no sh
+
+A(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+A(config-if)#exit
+A(config)#
+--------------Configuracion del puerto serial 0/1/0 
+A(config)#int se 0/1/0
+A(config-if)#ip add 1.1.1.2 255.255.255.248
+A(config-if)#no sh
+
+A(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+A(config-if)#exit
+A(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+A(config)#
+--------------Configuracion del puerto serial 0/2/0 
+A(config)#int se 0/2/0
+A(config-if)#ip add 1.2.2.1 255.255.255.248
+A(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to down
+A(config-if)#exit
+--------------Configuracion del puerto serial 0/3/0 
+A(config)#int se 0/3/0
+A(config-if)#ip add 4.1.1.2 255.255.255.248
+A(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/3/0, changed state to down
+A(config-if)#
+A(config-if)#exit
+------------Configuracion de las rutas
+--- A->B
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+--- A->E->B
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.1
+--- A->E->C->B
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.1
+--- A->E->D->C->B
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.1
+--- A->D->E->B
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.1
+--- A->D->E->C->B
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.1
+--- A->D->C->E->B
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.1
+
+
+--- A->D
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+--- A->E->D
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.1
+--- A->E->C->D
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.1
+--- A->B->C->D
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+--- A->B->E->D
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+--- A->B->E->C->D
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+--- A->B->C->E->D
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+
+--- A->E
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+--- A->B->E
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+--- A->B->C->E
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+--- A->B->C->D->E
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+--- A->D->E
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+--- A->C->E
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+--- A->C->B->E
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+
+--- A->C
+--- A->D->C
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+--- A->D->E->C
+A(config)#ip route 192.168.50.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.1
+--- A->E->C
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+--- A->E->D->C
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.50.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+--- A->E->B->C
+A(config)#ip route 192.168.10.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.30.0 255.255.255.0 1.1.1.1
+A(config)#ip route 192.168.40.0 255.255.255.0 1.1.1.1
+--- A->B->C
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+--- A->B->E->C
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+--- A->B->E->D->C
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.2
+A(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.2
+
+A(config)#do wr
+Building configuration...
+[OK]
+A(config)#
+
+// Configuracion de Router B
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host B
+B(config)#
+
+---------------Configuracion del puerto 0/0
+B(config)#int fa 0/0
+B(config-if)#ip add 192.168.30.1 255.255.255.0
+B(config-if)#no sh
+
+B(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+B(config-if)#exit
+B(config)#
+--------------Configuracion del puerto serial 0/2/0 
+B(config)#int se 0/2/0
+B(config-if)#ip add 1.2.2.2 255.255.255.248
+B(config-if)#no sh
+
+B(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+
+B(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+
+--------------Configuracion del puerto serial 0/1/0 
+B(config-if)#int se 0/1/0
+B(config-if)#ip add 2.2.2.2 255.255.255.248
+B(config-if)#no sh
+
+B(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+B(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+B(config-if)#
+
+--------------Configuracion del puerto serial 0/3/0 
+B(config)#int se 0/3/0
+B(config-if)#ip add 2.3.3.1 255.255.255.248
+B(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/3/0, changed state to down
+B(config-if)#
+
+------------Configuracion de las rutas
+--- B->A
+B(config-if)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+--- B->E->A
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.1
+--- B->E->D->A
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.1
+--- B->E->C->D->A
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.1
+--- B->C->D->E->A
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.2
+--- B->C->D->A
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.2
+--- B->C->E->A
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.2
+--- B->C->E->D->A
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.2
+
+--- B->E
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+--- B->C->E
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+--- B->C->D->E
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+--- B->A->E
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+--- B->A->D->E
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+--- B->A->D->C->E
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+
+--- B->C
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+--- B->E->C
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.1
+--- B->E->D->C
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.1
+--- B->E->A->D->C
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.1
+--- B->A->E->C
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.1
+--- B->A->E->D->C
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.1
+--- B->A->D->C
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 1.2.2.1
+
+-- B->D
+-- B->E->D
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+-- B->E->A->D
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.20.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+-- B->E->C->D
+B(config)#ip route 192.168.10.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.40.0 255.255.255.0 2.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 2.2.2.1
+-- B->A->D
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+-- B->A->E->D
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+-- B->A->E->C->D
+B(config)#ip route 192.168.20.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.10.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.30.0 255.255.255.0 1.2.2.1
+B(config)#ip route 192.168.50.0 255.255.255.0 1.2.2.1
+-- B->C->D
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+-- B->C->E->D
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+-- B->C->E->A->D
+B(config)#ip route 192.168.40.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.2
+B(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.2
+
+B(config)#do wr
+Building configuration...
+[OK]
+B(config)#
+
+// Configuracion de Router C
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host C
+C(config)#
+
+---------------Configuracion del puerto 0/0
+C(config)#int fa 0/0
+C(config-if)#ip add 192.168.40.1 255.255.255.0
+C(config-if)#no sh
+
+C(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+C(config-if)#
+---------------Configuracion del puerto 0/2/0
+C(config)#int se 0/2/0
+C(config-if)#ip add 2.3.3.2 255.255.255.248
+C(config-if)#no sh
+
+C(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+
+C(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+
+C(config-if)#
+
+---------------Configuracion del puerto 0/1/0
+C(config)#int se 0/1/0
+C(config-if)#ip add 3.3.3.2 255.255.255.248
+C(config-if)#no sh
+
+C(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+C(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+C(config-if)#
+
+
+---------------Configuracion del puerto 0/3/0
+C(config)#int se 0/3/0
+C(config-if)#ip add 3.4.4.1 255.255.255.248
+C(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial0/3/0, changed state to down
+C(config-if)#exit
+C(config)#
+
+------------Configuracion de las rutas
+--- C->A
+--- C->E->A
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+--- C->E->B->A
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+--- C->E->D->A
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+--- C->B->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+--- C->B->E->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+--- C->B->E->D->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+--- C->D->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.2
+--- C->D->E->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.2
+--- C->D->E->B->A
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.2
+
+--- C->D
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+--- C->E->D
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+--- C->E->A->D
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+--- C->E->B->A->D
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+--- C->B->E->D
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+--- C->B->A->D
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+--- C->B->E->A->D
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+--- C->B->A->E->D
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+
+--- C->B
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+--- C->E->B
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+--- C->E->A->B
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+--- C->E->D->A->B
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+
+--- C->D->E->A->B
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+--- C->D->A->E->B
+C(config)#ip route 192.168.50.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+C(config)#ip route 192.168.30.0 255.255.255.0 3.3.3.1
+
+--- C->E
+C(config)#ip route 192.168.10.0 255.255.255.0 3.3.3.1
+--- C->D->E
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.2
+--- C->D->A->E
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.2
+--- C->D->A->B->E
+C(config)#ip route 192.168.50.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.2
+C(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.2
+--- C->B->E
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+--- C->B->A->E
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+--- C->B->A->D->E
+C(config)#ip route 192.168.30.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.20.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.50.0 255.255.255.0 2.3.3.1
+C(config)#ip route 192.168.10.0 255.255.255.0 2.3.3.1
+
+C(config)#do wr
+Building configuration...
+[OK]
+C(config)#
+
+
+// Configuracion de Router D
+Router>ena
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host D
+D(config)#
+---------------Configuracion del puerto 0/0
+D(config)#int fa 0/0
+D(config-if)#ip add 192.168.50.1 255.255.255.0
+D(config-if)#no sh
+
+D(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+D(config-if)#exit
+D(config)#
+
+--------------Configuracion del puerto serial 0/3/0 
+D(config)#int se 0/3/0
+D(config-if)#ip add 4.1.1.1 255.255.255.248
+D(config-if)#no sh
+
+D(config-if)#
+%LINK-5-CHANGED: Interface Serial0/3/0, changed state to up
+
+D(config-if)#exit
+D(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/3/0, changed state to up
+
+D(config)#
+
+--------------Configuracion del puerto serial 0/1/0 
+D(config)#int se 0/1/0
+D(config-if)#ip add 4.4.4.2 255.255.255.248
+D(config-if)#no sh
+
+D(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+D(config-if)#exit
+D(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+D(config)#
+
+--------------Configuracion del puerto serial 0/2/0 
+D(config)#int se 0/2/0
+D(config-if)#ip add 3.4.4.2 255.255.255.248
+D(config-if)#no sh
+
+D(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+
+D(config-if)#exit
+D(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+
+D(config)#
+
+------------Configuracion de las rutas
+--- D->A
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+--- D->E->A
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+--- D->E->B->A
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+--- D->E->C->B->A
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+--- D->C->E->A
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.1
+--- D->C->B->A
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.1
+--- D->C->E->B->A
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.1
+--- D->C->B->E->A
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.1
+
+--- D->E
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+--- D->C->E
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+--- D->C->B->E
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+--- D->C->B->A->E
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.10.0 255.255.255.0 3.4.4.1
+--- D->A->E
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+--- D->A->B->E
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+--- D->A->B->C->E
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+
+--- D->C
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+--- D->E->C
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.1
+--- D->E->B->C
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.1
+--- D->E->A->B->C
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.1
+--- D->A->E->C
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.2
+--- D->A->E->B->C
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.2
+--- D->A->E->C
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.2
+--- D->A->B->E->C
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.40.0 255.255.255.0 4.1.1.2
+
+--- D->B
+--- D->A->B
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+--- D->A->E->B
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+--- D->A->E->C->B
+D(config)#ip route 192.168.20.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.30.0 255.255.255.0 4.1.1.2
+D(config)#ip route 192.168.10.0 255.255.255.0 4.1.1.2
+--- D->E->B
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+--- D->E->A->B
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+--- D->E->C->B
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.40.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+--- D->C->B
+D(config)#ip route 192.168.40.0 255.255.255.0 3.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 3.4.4.1
+--- D->E->B
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+--- D->E->A->B
+D(config)#ip route 192.168.10.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.20.0 255.255.255.0 4.4.4.1
+D(config)#ip route 192.168.30.0 255.255.255.0 4.4.4.1
+
+D(config)#do w
+Building configuration...
+[OK]
+D(config)#
