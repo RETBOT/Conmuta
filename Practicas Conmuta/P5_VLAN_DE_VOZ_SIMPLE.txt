@@ -4,7 +4,7 @@ Would you like to enter the initial configuration dialog? [yes/no]: n
 
 
 Press RETURN to get started!
-
+By: RETBOT
 
 
 Router>ena 
@@ -82,7 +82,7 @@ VOZ(config-ephone-dn)#epone-dn 5
 	
 VOZ(config-ephone-dn)#ephone-dn 5
 VOZ(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 5.1, changed state to up
-
+By: RETBOT
 VOZ(config-ephone-dn)#505
                       ^
 % Invalid input detected at '^' marker.
@@ -95,7 +95,7 @@ Building configuration...
 VOZ(config)#int ran fa 0/1-5
 interface range not validated - command rejected
 VOZ(config)#int ran fa 0/1-5
-
+By: RETBOT
 // SWITCH 
 Switch>ena
 Switch#conf t
@@ -112,3 +112,4 @@ Building configuration...
 [OK]
 Switch(config)#
 Switch#
+By: RETBOT
