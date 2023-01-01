@@ -1,3 +1,4 @@
+By: RETBOT
 // ROUTER 0
 Router>ena
 Router#conf t
@@ -103,7 +104,7 @@ E19(config-if)#exit
 E19(config)#int se 0/0/0
 E19(config-if)#ip add 2.2.2.2 255.255.255.252
 E19(config-if)#no sh
-
+By: RETBOT
 %LINK-5-CHANGED: Interface Serial0/0/0, changed state to down
 E19(config-if)#exit
 E19(config)#router rip
@@ -145,7 +146,7 @@ Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
        i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
        * - candidate default, U - per-user static route, o - ODR
        P - periodic downloaded static route
-
+By: RETBOT
 Gateway of last resort is not set
 
      1.0.0.0/30 is subnetted, 1 subnets
@@ -159,3 +160,4 @@ R    192.168.30.0/24 [120/1] via 2.2.2.2, 00:00:07, Serial0/0/1
 LBC(config)#
 LBC#
 %SYS-5-CONFIG_I: Configured from console by console
+By: RETBOT
