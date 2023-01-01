@@ -1,4 +1,4 @@
-Packet Tracer 8.2.0
+By: RETBOT
 // Configuracion de Router E
 Router>ENA
 Router#conf t
@@ -16,7 +16,7 @@ E(config)#int se 0/0/0
 E(config-if)#ip add 1.1.1.1 255.255.255.248
 E(config-if)#clock rate 64000
 E(config-if)#no sh
-
+By: RETBOT
 %LINK-5-CHANGED: Interface Serial0/0/0, changed state to down
 E(config-if)#
 E(config-if)#exit
@@ -164,7 +164,7 @@ A(config-if)#exit
 A(config)#int se 0/3/0
 A(config-if)#ip add 4.1.1.2 255.255.255.248
 A(config-if)#no sh
-
+By: RETBOT
 %LINK-5-CHANGED: Interface Serial0/3/0, changed state to down
 A(config-if)#
 A(config-if)#exit
@@ -308,7 +308,7 @@ B(config-if)#no sh
 
 B(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
-
+By: RETBOT
 B(config-if)#exit
 B(config)#
 --------------Configuracion del puerto serial 0/2/0 
@@ -493,7 +493,7 @@ C(config-if)#
 C(config)#int se 0/2/0
 C(config-if)#ip add 2.3.3.2 255.255.255.248
 C(config-if)#no sh
-
+By: RETBOT
 C(config-if)#
 %LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
 
@@ -661,7 +661,7 @@ D(config)#
 D(config)#int fa 0/0
 D(config-if)#ip add 192.168.50.1 255.255.255.0
 D(config-if)#no sh
-
+By: RETBOT
 D(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
 
