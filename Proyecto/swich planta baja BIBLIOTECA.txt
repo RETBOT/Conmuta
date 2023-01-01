@@ -3,7 +3,7 @@ Switch>ena
 Switch#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
 Switch(config)#host SWAB
-
+//  By: RETBOT
 SWAB(config)#vlan 10
 SWAB(config-vlan)#name ACCESS_POINT_OTROS
 SWAB(config-vlan)#exit
@@ -28,7 +28,7 @@ SWAB(config-vlan)#exit
 SWAB(config)#vlan 80
 SWAB(config-vlan)#name VOZIP_TELEFONOS
 SWAB(config-vlan)#exit
-
+//  By: RETBOT
 // apagamos el puerto 24, no esta en uso
 SWAB(config)#int fa 0/24
 SWAB(config-if)#sh
@@ -37,7 +37,7 @@ SWAB(config-if)#shutdown
 %LINK-5-CHANGED: Interface FastEthernet0/24, changed state to administratively down
 SWAB(config-if)#
 SWAB(config-if)#
-
+//  By: RETBOT
 SWAB(config)#int fa 0/23
 SWAB(config-if)#swi
 SWAB(config-if)#switchport mode trun
@@ -81,7 +81,7 @@ Cubiculos(config-if-range)#sw
 Cubiculos(config-if-range)#switchport access vlan 20
 Cubiculos(config-if-range)#exit
 Cubiculos(config)#
-
+//  By: RETBOT
 // Administrativos
 SWAB(config)#int range fa 0/3-4
 SWAB(config-if-range)#swi
@@ -113,7 +113,7 @@ SWAB(config-if)#sw
 SWAB(config-if)#switchport ac
 SWAB(config-if)#switchport access vlan 70
 SWAB(config-if)#
-
+//  By: RETBOT
 // Telefonos
 SWAB(config-if)#int range fa 0/9-11
 SWAB(config-if-range)#sw
@@ -157,5 +157,5 @@ Configured MAC Addresses   : 1
 Sticky MAC Addresses       : 0
 Last Source Address:Vlan   : 0002.4ABB.6B38:50
 Security Violation Count   : 0
-
+//  By: RETBOT
 SWAB#
