@@ -1,4 +1,4 @@
-
+//  By: RETBOT
 BIBLIOTECA>ena
 BIBLIOTECA#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -13,7 +13,7 @@ Choose the size of the key modulus in the range of 360 to 2048 for your
 
 How many bits in the modulus [512]: 512
 % Generating 512 bit RSA keys, keys will be non-exportable...[OK]
-
+//  By: RETBOT
 BIBLIOTECA(config)#ip ssh time-out 15
 *Mar 1 4:23:3.838: RSA key size needs to be at least 768 bits for ssh version 2
 *Mar 1 4:23:3.838: %SSH-5-ENABLED: SSH 1.5 has been enabled
@@ -35,11 +35,11 @@ Building configuration...
 BIBLIOTECA(config)#
 
 username admin2 privilege 15 secret Firewall.cx
-username "nombre usuario" privilege "numero de privilegio" secret "contraseña"
+username "nombre usuario" privilege "numero de privilegio" secret "contraseÃ±a"
 
 ssh -l admin2 13.43.3.129
 password: Firewall.cx
 
-
+//  By: RETBOT
 ssh -l admin 13.43.3.129
 password: 123456
