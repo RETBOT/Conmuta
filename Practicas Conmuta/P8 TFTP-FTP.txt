@@ -1,5 +1,5 @@
 //TFTP
-
+By: RETBOT
 Router>ena
 Router#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -41,7 +41,7 @@ Router(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
-
+By: RETBOT
 Router(config-if)#end
 Router#
 %SYS-5-CONFIG_I: Configured from console by console
@@ -79,7 +79,7 @@ Router(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
-
+By: RETBOT
 Router(config-if)#exit
 Router(config)#ip ftp username RETBOT
 Router(config)#ip ftp password 123
@@ -90,7 +90,7 @@ Router#
 Router#copy running-config ftp
 Address or name of remote host []? 192.168.5.5
 Destination filename [Router-confg]? 
-
+By: RETBOT
 Writing running-config...
 [OK - 658 bytes]
 
@@ -113,3 +113,4 @@ Router(config)#ip ftp username RETBOT2
 Router(config)#ip ftp passwo
 Router(config)#ip ftp password 123
 Router(config)#exit
+By: RETBOT
