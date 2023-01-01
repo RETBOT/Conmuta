@@ -1,3 +1,4 @@
+//  By: RETBOT
 configuracion Router
 Router>ena
 Router#conf t
@@ -36,7 +37,7 @@ BIBLIOTECA(config-subif)#
 %LINK-5-CHANGED: Interface FastEthernet0/0.30, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.30, changed state to up
-
+//  By: RETBOT
 BIBLIOTECA(config-subif)#encapsulation dot1Q 30
 BIBLIOTECA(config-subif)#ip add 13.43.2.129 255.255.255.128
 BIBLIOTECA(config-subif)#exit
@@ -100,7 +101,7 @@ BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.129 // ip vlan 50 router
 BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.193 // ip vlan 60 router
 BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.209 // ip vlan 70 router
 BIBLIOTECA(config)#ip dhcp excluded-address 13.43.3.225 // ip vlan 80 router
-
+//  By: RETBOT
 // Pool dhcp
 // VLAN = Access Point
 BIBLIOTECA(config)#ip dhcp pool vlan10
@@ -163,7 +164,7 @@ BIBLIOTECA(dhcp-config)#default-router 13.43.3.225
 BIBLIOTECA(dhcp-config)#option 150 ip 13.43.3.225
 BIBLIOTECA(dhcp-config)#exit
 BIBLIOTECA(config)#
-
+//  By: RETBOT
 BIBLIOTECA(config)#ip dhcp pool vlan10
 BIBLIOTECA(dhcp-config)#dns
 BIBLIOTECA(dhcp-config)#dns-server 13.43.3.130
@@ -225,7 +226,7 @@ BIBLIOTECA(config-ephone)#mac-address 0001.420A.5A01
 BIBLIOTECA(config-ephone)#type 7960
 BIBLIOTECA(config-ephone)#exit
 BIBLIOTECA(config)#
-
+//  By: RETBOT
 BIBLIOTECA(config)#ephone-dn 3
 BIBLIOTECA(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 3.1, changed state to up
 BIBLIOTECA(config-ephone-dn)#number 503
