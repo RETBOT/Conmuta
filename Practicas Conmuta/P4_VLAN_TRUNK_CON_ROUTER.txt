@@ -1,4 +1,4 @@
-
+By: RETBOT
 // SWITCH
 Switch>ena
 Switch#config t
@@ -45,7 +45,7 @@ VLAN Name                             Status    Ports
 1003 token-ring-default               active    
 1004 fddinet-default                  active    
 1005 trnet-default                    active    
-
+By: RETBOT
 VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
 ---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
 1    enet  100001     1500  -      -      -        -    -        0      0
@@ -90,7 +90,7 @@ PEQUE(config)#vlan 300
 PEQUE(config-vlan)#name OTROS
 PEQUE(config-vlan)#exit
 PEQUE(config)#do sh vlan
-
+By: RETBOT
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
 1    default                          active    Fa0/24
@@ -135,7 +135,7 @@ PEQUE_TRUNK(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
-	
+	By: RETBOT
 PEQUE_TRUNK(config-if)#enca
 PEQUE_TRUNK(config-if)#encapsul
 PEQUE_TRUNK(config-if)#exit
@@ -144,7 +144,7 @@ PEQUE_TRUNK(config-subif)#
 %LINK-5-CHANGED: Interface FastEthernet0/0.100, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.100, changed state to up
-
+By: RETBOT
 PEQUE_TRUNK(config-subif)#no sh
 PEQUE_TRUNK(config-subif)#encap
 PEQUE_TRUNK(config-subif)#encapsulation dot1Q 100
@@ -166,4 +166,4 @@ Building configuration...
 [OK]
 PEQUE_TRUNK(config)#
 
-
+By: RETBOT
