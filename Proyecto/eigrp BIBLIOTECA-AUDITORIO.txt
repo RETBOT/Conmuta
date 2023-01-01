@@ -1,5 +1,5 @@
 EIGRP BIBLIOTECA -> AUDITORIO
-
+//  By: RETBOT
 BIBLIOTECA(config)#int fa 0/1
 BIBLIOTECA(config-if)#ip add 10.0.0.1 255.255.255.252
 BIBLIOTECA(config-if)#no sh
@@ -34,7 +34,7 @@ Router(config)#host AUDITORIO
 AUDITORIO(config)#int fa 0/0
 AUDITORIO(config-if)#ip add 10.0.0.2 255.255.255.252
 AUDITORIO(config-if)#no sh
-
+//  By: RETBOT
 AUDITORIO(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
 
@@ -60,3 +60,4 @@ AUDITORIO(config)#do wr
 Building configuration...
 [OK]
 AUDITORIO(config)#
+//  By: RETBOT
