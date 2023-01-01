@@ -1,3 +1,4 @@
+By: RETBOT
 // TELNET
 Router>ena
 Router#conf t
@@ -24,12 +25,12 @@ Building configuration...
 [OK]
 TELNET(config)#do sh run
 Building configuration...
-
+By: RETBOT
 // Desde terminal para entrar al router COMEDOR
 telnet 192.168.0.1 
 
-contraseña: LONCHE 
-contraseña Administrador: MIXTO
+contraseÃ±a: LONCHE 
+contraseÃ±a Administrador: MIXTO
 
 
 
@@ -44,7 +45,7 @@ SSH(config-if)#no sh
 
 SSH(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
-
+By: RETBOT
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
 
 SSH(config-if)#exit
@@ -76,7 +77,7 @@ SSH(config)#banner motd "SOLO PERSONAL CHIDO"
 SSH(config)#do wr
 Building configuration...
 [OK]
-
+By: RETBOT
 
 cmd 
 ssh -l PEQUE 192.168.0.1 
@@ -84,7 +85,8 @@ password: 122345
 SSH(config)#
 
 username admin privilege 15 secret Firewall.cx
-username "nombre usuario" privilege "numero de privilegio" secret "contraseña"
+username "nombre usuario" privilege "numero de privilegio" secret "contraseÃ±a"
 15
 10
 5
+By: RETBOT
