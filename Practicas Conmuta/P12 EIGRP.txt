@@ -1,3 +1,4 @@
+By: RETBOT
 // RTA
 Router>ena
 Router#conf t
@@ -79,7 +80,7 @@ Router(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
-
+By: RETBOT
 Router(config-if)#exit
 Router(config)#int fa 0/0
 Router(config-if)#no sh
@@ -104,3 +105,4 @@ Router(config)#do wr
 Building configuration...
 [OK]
 Router(config)#
+By: RETBOT
