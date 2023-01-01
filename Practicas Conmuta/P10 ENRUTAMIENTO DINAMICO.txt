@@ -1,3 +1,4 @@
+By: RETBOT
 // ROUTER 0
 Router>ena
 Router#conf t
@@ -313,7 +314,7 @@ B(config-if)#
 B(config-if)#exit
 B(config)#int se 0/0/1
 %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
-
+By: RETBOT
 B(config-if)#ip add 1.2.2.2 255.255.255.248
 B(config-if)#no sh
 
@@ -428,7 +429,7 @@ D(config-if)#no sh
 
 D(config-if)#
 %LINK-5-CHANGED: Interface Serial0/0/0, changed state to up
-
+By: RETBOT
 D(config-if)#exit
 D(config)#int se 0/0/0
 %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed 
