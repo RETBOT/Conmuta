@@ -1,3 +1,4 @@
+//  By: RETBOT
 Swich planta alta
 Switch>ena
 Switch#conf t
@@ -28,7 +29,7 @@ SWAR(config-vlan)#exit
 SWAR(config)#vlan 80
 SWAR(config-vlan)#name VOZIP_TELEFONOS
 SWAR(config-vlan)#exit
-SWAR(config)#
+SWAR(config)#//  By: RETBOT
 // puerto en modo trunk
 SWAR(config)#int fa 0/24
 SWAR(config-if)#swi
@@ -49,7 +50,7 @@ Building configuration...
 [OK]
 SWAR(config)#
 
-
+//  By: RETBOT
 // AULA PROYECTOR
 SWAR(config)#int fa 0/1
 SWAR(config-if)#switchport mode access
@@ -80,7 +81,7 @@ SWAR(config-if)#swi
 SWAR(config-if)#switchport access vlan 30
 SWAR(config-if)#exit
 SWAR(config)#
-
+//  By: RETBOT
 Switch>ena
 Switch#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -116,7 +117,7 @@ CUBICULOS(config-if-range)#swi
 CUBICULOS(config-if-range)#switchport access vlan 20
 CUBICULOS(config-if-range)#exit
 CUBICULOS(config)#
-
+//  By: RETBOT
 // ACCESS POINT OTROS
 SWAR(config)#int fa 0/4
 SWAR(config-if)#swi
@@ -139,7 +140,7 @@ SWAR(config-if-range)#switchport mode access
 SWAR(config-if-range)#switchport access vlan 70
 SWAR(config-if-range)#exit
 SWAR(config)#
-
+//  By: RETBOT
 
 // Asignando vlans a puertos de ip phone en caso de conectar otra maquina directo al telefono
 SWAB(config)#int range fa 0/9-10
@@ -178,7 +179,7 @@ SWAR(config-if)#swi
 SWAR(config-if)#switchport mode ac
 SWAR(config-if)#switchport mode access 
 SWAR(config-if)#swi
-
+//  By: RETBOT
 SWAR(config-if)#switchport access vlan 50
 SWAR(config-if)#sw
 SWAR(config-if)#switchport port-security
@@ -221,7 +222,7 @@ SWAR(config-if)#do wr
 Building configuration...
 [OK]
 SWAR(config-if)#
-
+//  By: RETBOT
 SWAR#show port-security int fa 0/21
 Port Security              : Enabled
 Port Status                : Secure-up
@@ -235,7 +236,7 @@ Configured MAC Addresses   : 1
 Sticky MAC Addresses       : 0
 Last Source Address:Vlan   : 0002.4A1D.E476:50
 Security Violation Count   : 0
-
+//  By: RETBOT
 
 // desactivar puertos 
 SWAR(config)#vlan 2
@@ -254,3 +255,4 @@ SWAR(config-if-range)#sh
 %LINK-5-CHANGED: Interface FastEthernet0/20, changed state to administratively down
 
 
+//  By: RETBOT
