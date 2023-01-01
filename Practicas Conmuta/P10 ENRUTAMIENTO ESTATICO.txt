@@ -1,3 +1,4 @@
+By: RETBOT
 // ROUTER 0
 Router>ena
 Router#conf t
@@ -88,7 +89,7 @@ R0(config)#
 %LINK-5-CHANGED: Interface Serial0/3/0, changed state to up
 %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/3/0, changed state to up
 R0(config)#
-
+By: RETBOT
 // ROUTER 2
 Router>ena
 Router#conf t
@@ -204,7 +205,7 @@ R3(config-if)#no sh
 
 R3(config-if)#
 %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
-
+By: RETBOT
 %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
 
 R3(config-if)#exit
@@ -224,6 +225,7 @@ R3(config)#do wr
 Building configuration...
 [OK]
 R3(config)#
+By: RETBOT
 
 // configurar la ruta para llegar del router 3 al router 0 y 1
 R3(config)#ip route 192.168.20.0 255.255.255.0 3.3.3.1
