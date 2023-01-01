@@ -1,3 +1,4 @@
+By: RETBOT
 Switch>ena
 Switch#config
 Configuring from terminal, memory, or network [terminal]? 
@@ -48,7 +49,7 @@ Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 40
 Switch(config-if-range)#exit
 Switch(config)#do sh vlan
-
+By: RETBOT
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
 1    default                          active    Fa0/21, Fa0/22, Fa0/23, Fa0/24
@@ -72,7 +73,7 @@ Switch(config-vlan)#interface range fastEthernet 0/21-24
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 50
 Switch(config-if-range)#do sh vlan
-
+By: RETBOT
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
 1    default                          active    
@@ -96,3 +97,4 @@ VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
 10   enet  100010     1500  -      -      -        -    -        0      0
 
 Switch(config-if-range)#
+By: RETBOT
